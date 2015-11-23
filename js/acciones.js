@@ -12,28 +12,43 @@ $(document).ready(function(e) {
 	var vibrar=1;
 	var sonido=1;
 	
-	function nueva_palabra_bd()
+	function nueva_palabra_bd($id_palabra)
 	{ 
-      alert ("dentro");
+     var oportunidades=6;
+     var imagen_actual=0;
+
+
 		$.ajax({
 			type: "POST",
-			url: "http://192.168.1.30/buscar_palabra.php"
+			url: "http://192.168.1.30/buscar_palabra.php",
+			data: "clave=" + $id_palabra			
 		}).done(function(msj){
-			alert(msj);
+			
+			alert(decode(msj));
 		
 		});
 				
-
-			
+/*	 palabra_actual= palabras[Math.floor((Math.random()*19))];
+	 palabra_oculta="";
+	 for(x=0;x<palabra_actual.length;x++)
+	 	{
+		 	palabra_oculta=palabra_oculta + "_";
+		}
+	$('#palabra').text(palabra_oculta);
+	$('#actual').text(abecedario[0]);
+	alert(palabra_actual);
+	posicion_actual=0; 
+	*/		
 		
 	}
 	
 	
 //document.addEventListener("deviceready",function(){
 	$('#btn_comenzar').on('tap',function(){
-		$('#encontradas').text('0');
-		nueva_palabra_bd();
+		$('#encontradas').text('0');		
+		nueva_palabra_bd(Math.floor((Math.random() * 89) + 1));
 	});
+	
 	function nueva_palabra()
 	{var oportunidades=6;
      var imagen_actual=0;
