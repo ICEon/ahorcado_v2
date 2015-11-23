@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+ 
+  <title>Ahorcado</title>
+
+  <!--grupo CSS-->
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+  <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.5.min.css" />
+  <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/estilo.css">     
+  <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">      
+
+
+  <!--grupo JavaScript-->
+  <script src="js/jquery-1.11.2.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="js/acciones.js" type="text/javascript"></script>
+  <script src="phonegap.js" type="text/javascript"></script>
+ </head>
+
+ <body>
+ 
+ <!-- Principal -->
+ <div data-role="page" id="principal" >   
+  <div data-role="header">
+    <h1>Ahorcado</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+  	<div align="center">
+    	<div data-role="controlgroup" style="width:65%">
+    		<a href="#jugar" class="ui-btn ui-btn-corner-all ui-icon-check ui-btn-icon-right">Jugar</a>
+    		<a href="#opciones" class="ui-btn ui-btn-corner-all ui-icon-gear ui-btn-icon-right">Opciones</a>
+  		</div>
+  	</div>
+   </div>
+ </div>   
+ <!-- Principal -->
+
+ <!-- opciones -->
+ <div data-role="page" id="opciones" >   
+  <div data-role="header">
+    <h1>Opciones</h1>
+    <a href="#principal" class="ui-btn-left" data-icon="home">Inicio</a>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <div align="center">
+    	<div data-role="controlgroup" style="width:65%">
+    		<a href="#sonido" id="btn_sonido" class="ui-btn ui-btn-corner-all ui-icon-audio ui-btn-icon-right">Sonido</a>
+    		<a href="#vibrar" id="btn_vibrar" class="ui-btn ui-btn-corner-all ui-icon-power ui-btn-icon-right">Vibrar</a>
+  		</div>
+  	</div>
+  </div>
+ </div>   
+ <!-- opciones -->
+ 
+ <!-- juego -->
+ <div data-role="page" id="jugar" >   
+  <div data-role="header">
+    <a href="#principal" class="ui-btn ui-btn-left ui-btn-inline ui-corner-all ui-icon-home ui-btn-icon-left">Inicio</a>
+    	<h1>Ahorcado</h1>
+    <a href="#" id="btn_comenzar" class="ui-btn ui-btn-right ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-right">Comenzar</a>
+  </div>
+
+  <div data-role="main" class="ui-content" align="center">
+  
+   <div data-role="popup" id="error" data-overlay-theme="a" data-theme="b" data-dismissible="false">
+      <div data-role="header" data-theme="a">
+        <h1 style=" margin:1px 20px 1px;">¡¡¡ Ahorcado !!!</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+       <div align="center">
+         <i class="ion-close-circled grande">No has adivinado, juego terminado</i>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Continuar</a>
+       </div>
+      </div>
+    </div> 
+
+   <div data-role="popup" id="acierto" data-overlay-theme="a" data-theme="b" data-dismissible="false">
+      <div data-role="header" data-theme="a">
+        <h1 style=" margin:1px 20px 1px;">¡¡¡ Palabra Adivinada !!!</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+       <div align="center">
+         <i class="ion-checkmark-circled grande">Has encontrado la palabra oculta</i>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Continuar</a>
+       </div>
+      </div>
+    </div> 
+
+  
+  
+  	<div>
+  		<img id="imagen" src="recursos/imagenes/01jpg."/>
+    </div>
+    <div id="palabra">
+     &nbsp;
+    </div>                                         
+    <div id="contenedor">
+    	<div id="anterior" class="letras">
+        	<i class="ion-chevron-left grande"> </i>
+        </div>
+        <div id="actual" class="letras"> </div>
+        <div id="siguiente" class="letras">
+        	<i class="ion-chevron-right grande"> </i>
+        </div>
+    </div>
+  </div>
+  <div data-role="footer">
+  	<h2>Palabras Encontradas: <span id="encontradas">0</span></h2>
+  </div>
+ </div>   
+ <!-- juego -->
+ 
+ </body>
+</html> 

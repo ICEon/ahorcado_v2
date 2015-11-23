@@ -1,0 +1,22 @@
+@charset "utf-8";
+ /* CSS Document */
+ #palabra
+ {font-size:4em;
+  font-weight:bold;
+  letter-spacing:1em;
+  text-align:center;
+ }
+ .letras
+ {font-size:4em;
+  font-weight:bold;
+  text-align:center;
+  padding:10px;
+  display:inline-block;
+ }
+ .grande
+ {display:block;
+  color:#E67E22;
+ }
+#encontradas
+{ color:#F00;
+}
