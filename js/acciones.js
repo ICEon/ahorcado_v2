@@ -23,12 +23,10 @@ $(document).ready(function(e) {
 			url: "http://192.168.1.30/buscar_palabra.php",
 			data: "clave=" + $id_palabra
 		}).done(function(msj){
-			
-			alert(msj);
-		
+           palabra_actual = msj;	
 		});
 				
-/*	 palabra_actual= palabras[Math.floor((Math.random()*19))];
+
 	 palabra_oculta="";
 	 for(x=0;x<palabra_actual.length;x++)
 	 	{
@@ -38,7 +36,7 @@ $(document).ready(function(e) {
 	$('#actual').text(abecedario[0]);
 	alert(palabra_actual);
 	posicion_actual=0; 
-	*/		
+
 		
 	}
 	
