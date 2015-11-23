@@ -14,6 +14,7 @@ $(document).ready(function(e) {
 	
 	function nueva_palabra_bd()
 	{ 
+	alert ("HERE");
         $datos = "clave=2";
 		$.ajax({
 			type: "POST",
