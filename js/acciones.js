@@ -33,6 +33,7 @@ $(document).ready(function(e) {
 //document.addEventListener("deviceready",function(){
 	$('#btn_comenzar').on('click',function(){
 		$('#encontradas').text('0');
+		alert ("preguntando...");
 		nueva_palabra_bd();
 	});
 	function nueva_palabra()
