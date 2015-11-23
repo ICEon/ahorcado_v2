@@ -14,12 +14,11 @@ $(document).ready(function(e) {
 	
 	function nueva_palabra_bd()
 	{ 
-	alert ("HERE");
-        $datos = "clave=2";
+
+
 		$.ajax({
 			type: "POST",
-			url: "http://192.168.1.30/buscar_palabra.php",
-			data: $datos
+			url: "http://192.168.1.30/buscar_palabra.php"
 		}).done(function(msj){
 			alert(mensaje);
 		
