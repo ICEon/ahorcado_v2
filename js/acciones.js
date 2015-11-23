@@ -16,7 +16,7 @@ $(document).ready(function(e) {
 	{ 
      var oportunidades=6;
      var imagen_actual=0;
-
+alert ($id_palabra);
 
 		$.ajax({
 			type: "POST",
