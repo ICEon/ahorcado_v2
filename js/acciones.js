@@ -23,7 +23,8 @@ $(document).ready(function(e) {
 			url: "http://192.168.1.30/buscar_palabra.php",
 			data: "clave=" + $id_palabra
 		}).done(function(msj){
-           palabra_actual = msj;	
+			
+           palabra_actual = msj.substring(1, msj.length-1);
 		});
 				
 
