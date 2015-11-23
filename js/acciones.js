@@ -16,12 +16,12 @@ $(document).ready(function(e) {
 	{ 
      var oportunidades=6;
      var imagen_actual=0;
-alert ($id_palabra);
-
+     $datos="clave=" + $id_palabra;
+     alert ($datos);
 		$.ajax({
 			type: "POST",
 			url: "http://192.168.1.30/buscar_palabra.php",
-			data: "clave=" + $id_palabra			
+			data: $datos
 		}).done(function(msj){
 			
 			alert(decode(msj));
