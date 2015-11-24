@@ -53,8 +53,9 @@ $(document).ready(function(e) {
 		temp = "";
 	 for (x=0; x<palabra_actual.length;x++)
 	  {
-		  alert ("palabra actual " + palabra_actual.charAt(x));
-		if (palabra_actual.charAt(x) == letra_actual)
+		  
+		  
+		if (""+palabra_actual.charAt(x) == letra_actual.charAt(0))
 		 {
 			 alert ("dentro" + letra_actual);
 		  temp = temp + letra_actual;
@@ -68,7 +69,7 @@ $(document).ready(function(e) {
 	    if (palabra_oculta != temp)
 		 {
           alert ("cambio");
-		  $("#palabra").addClass("flipt animated");
+		  $("#palabra").addClass("flip animated");
 		  palabra_oculta = temp;
 		  $('#palabra').text(palabra_oculta);		  
 		 }
