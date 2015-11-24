@@ -1,11 +1,12 @@
 // JavaScript Document
 $(document).ready(function(e) {
 	var abecedario=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-	var palabras=['FRESA','CEREZO','AMNESIA','JAPON','ANIME','AMOR','LOBO','CHICA','ROSA','LIBRO','CONEJO','TINTA','MANGA','FESTIVAL','PRINCIPE','GATO','AZUL','LETRAS','TOKIO','CHOCOLATE'];
+
 	var oportunidades=0;
 	var imagen_actual=0;
 	var palabra_oculta="";
 	var palabra_actual="";
+	var temp="";
 	var posicion_actual=0;
 	var letra_actual=0;
 	var palabra=[];
@@ -31,8 +32,13 @@ $(document).ready(function(e) {
 	 palabra_oculta="";
 	 for(x=0;x<palabra_actual.length;x++)
 	 	{
+		    if (palabra_actual.charAt(x) != " ")
+			 {
 		 	palabra_oculta=palabra_oculta + "_";
+			 }
+ 		    palabra_oculta=palabra_oculta + " ";
 		}
+		
 	$('#palabra').text(palabra_oculta);
 	$('#actual').text(abecedario[0]);
 	alert(palabra_actual);
@@ -41,28 +47,46 @@ $(document).ready(function(e) {
 		
 	}
 	
+	$('#actual').on('tap', function(){
+		letra_actual = $('#actual').html();
+		temp = "";
+	 for (x=0; x<palabra_oculta.length;x++)
+	  {
+		if (palabra_actual.charAt(x) == letra_actual)
+		 {
+		  temp = temp + letra_actual;
+		 }
+		else
+		 {
+		  temp = temp + palabra_oculta.charAt(x); 
+		 }
+	  }
+	    if (palabra_oculta != temp)
+		 {
+
+		  $("#palabra").addClass("animated.flipt animated");
+		  palabra_oculta = temp;
+		  $('#palabra').text(palabra_oculta);		  
+		 }
+		else
+		 {
+ 		  $("#palabra").addClass("shake animated");
+			 //shake
+		 }
+		
+	});
 	
 //document.addEventListener("deviceready",function(){
 	$('#btn_comenzar').on('tap',function(){
 		$('#encontradas').text('0');		
 		nueva_palabra_bd(Math.floor((Math.random() * 89) + 1));
+		
 	});
 	
-	function nueva_palabra()
-	{var oportunidades=6;
-     var imagen_actual=0;
-	 $('imagen').attr('src','recursos/imagenes/ahoracado0.jpg');
-	 palabra_actual= palabras[Math.floor((Math.random()*19))];
-	 palabra_oculta="";
-	 for(x=0;x<palabra_actual.length;x++)
-	 	{
-		 	palabra_oculta=palabra_oculta + "_";
-		}
-	$('#palabra').text(palabra_oculta);
-	$('#actual').text(abecedario[0]);
-	alert(palabra_actual);
-	posicion_actual=0;
-	};
+
+	
+	
+	
 //boton siguiente	
 	$('#siguiente').on('click',function(){
 		$('#actual').stop().animate({opacity:'0,0'}, {duration:80, complete:function(){
@@ -91,6 +115,7 @@ $(document).ready(function(e) {
 		});
 	});
 //fin de boton anterior
+	
 	$("#btn_sonido").on('click',function(){
 		if($("#btn_sonido").hasClass('ui-icon-audio'))
 			{//sonido=0;
