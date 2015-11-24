@@ -66,12 +66,15 @@ $(document).ready(function(e) {
 		  temp = temp + palabra_oculta.charAt(x); 
 		 }
 	  }
+	  alert ("palabra oculta " + palabra_oculta);
+	  	  alert ("palabra temporal " + temp);
 	    if (palabra_oculta != temp)
 		 {
           alert ("cambio");
 		  $("#palabra").addClass("flip animated");
 		  palabra_oculta = temp;
-		  $('#palabra').text(palabra_oculta);		  
+		  $('#palabra').text(palabra_oculta);		
+  		  $("#palabra").removeClass("flip animated");  
 		 }
 		else
 		 {
