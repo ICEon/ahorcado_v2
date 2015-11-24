@@ -49,10 +49,10 @@ $(document).ready(function(e) {
 	
 	$('#actual').on('tap', function(){
 		letra_actual = $('#actual').html();
-		alert ("letra Actual " + letra_actual);
 		temp = "";
-	 for (x=0; x<palabra_oculta.length;x++)
+	 for (x=0; x<palabra_actual.length;x++)
 	  {
+		  alert ("palabra actual " + palabra_actual.charAt(x));
 		if (palabra_actual.charAt(x) == letra_actual)
 		 {
 			 alert (letra_actual);
