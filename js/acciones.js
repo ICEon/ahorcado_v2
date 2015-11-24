@@ -26,10 +26,7 @@ $(document).ready(function(e) {
 		}).done(function(msj){
 			
            palabra_actual = msj.substring(1, msj.length-1);
-		});
-				
-
-	 palabra_oculta="";
+		   	 palabra_oculta="";
 	 for(x=0;x<palabra_actual.length;x++)
 	 	{
 		    if (palabra_actual.charAt(x) != " ")
@@ -44,6 +41,10 @@ $(document).ready(function(e) {
 	alert(palabra_actual);
 	posicion_actual=0; 
 
+		});
+				
+
+
 		
 	}
 	
@@ -55,7 +56,7 @@ $(document).ready(function(e) {
 		  alert ("palabra actual " + palabra_actual.charAt(x));
 		if (palabra_actual.charAt(x) == letra_actual)
 		 {
-			 alert (letra_actual);
+			 alert ("dentro" + letra_actual);
 		  temp = temp + letra_actual;
 		  
 		 }
