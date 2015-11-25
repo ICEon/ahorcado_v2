@@ -78,7 +78,7 @@ palabra_actual = palabra_actual.toUpperCase();
 
 
 				
-alert (palabra_actual);
+//alert (palabra_actual);
          //palabra_actual = "E JE";
 		   	 palabra_oculta="";
 	 for(x=0;x<palabra_actual.length;x++)
@@ -231,6 +231,7 @@ alert (palabra_actual);
 		  	 $("#palabra_error").removeClass("animated");   	 
 	 $("#palabra_error").removeClass("hinge");
 	 $('#palabra_error').text("");
+	 $('#palabra').text("");
 	   $("#error").popup();
   $("#error").popup("open");	 
   		$('#btn_comenzar').css('visibility','visible');
