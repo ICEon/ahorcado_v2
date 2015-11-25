@@ -230,7 +230,7 @@ document.addEventListener("deviceready",function(){
 	 conectar_base();
 	 
 	$('#btnJuego').on('tap', function(){
-	   var ancho = ($('#principal').width()/4);
+	   var ancho = ($('#principal').width()/5);
 	   alert (ancho);
 	   $('#imagen').width(ancho);
 	});
