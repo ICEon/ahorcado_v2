@@ -42,7 +42,6 @@ $(document).ready(function(e) {
 	var abecedario=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     var encontradas = 0;
 	var oportunidades=0;
-	var imagen_actual=0;
 	var palabra_oculta="";
 	var palabra_actual="";
 	var temp="";
@@ -52,8 +51,9 @@ $(document).ready(function(e) {
 	var vibrar=0; 
 	function nueva_palabra_bd($id_palabra)
 	{ 
-      oportunidades=3;
-      imagen_actual=0;
+      oportunidades=6;
+
+	  $('#imagen').attr('src', 'recursos/imagenes/' + oportunidades +'.png');
 	  
   	 $('#palabra').css('display', '')
 	 $('#palabra_error').text('');
