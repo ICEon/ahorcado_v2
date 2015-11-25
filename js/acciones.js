@@ -70,7 +70,7 @@ $(document).ready(function(e) {
 		}).done(function(msj){
 			
            palabra_actual = msj.substring(1, msj.length-1);
-
+palabra_actual = palabra_actual.toUpperCase();
 
 
 				
@@ -280,7 +280,8 @@ document.addEventListener("deviceready",function(){
 		if($("#btn_sonido").hasClass('ui-icon-audio'))
 			{
 			 db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET sonido = 0 WHERE id = 1", function(tx, res) {			   
+
+              tx.executeSql("UPDATE configuracion SET (sonido) VALUES (?) WHERE id = 1", [1],function(tx, res) {sonido=1;			   
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
@@ -293,7 +294,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			 db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET sonido = 1 WHERE id = 1", function(tx, res) {			   
+              tx.executeSql("UPDATE configuracion SET (sonido) VALUES (?) WHERE id = 1",[0], function(tx, res) {sonido=0;			   
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
@@ -308,7 +309,7 @@ document.addEventListener("deviceready",function(){
 	$("#btn_vibrar").on('click',function(){
 		if($("#btn_vibrar").hasClass('ui-icon-power'))
 			{db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET vibrar = 0 WHERE id = 1", function(tx, res) {			   
+              tx.executeSql("UPDATE configuracion SET (vibrar) VALUES (?) WHERE id = 1", [1], function(tx, res) {vibrar = 1;
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
@@ -320,7 +321,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET vibrar = 1 WHERE id = 1", function(tx, res) {			   
+              tx.executeSql("UPDATE configuracion SET (vibrar) VALUES (?) WHERE id = 1", [0], function(tx, res) {			vibrar = 0;   
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
