@@ -281,7 +281,7 @@ document.addEventListener("deviceready",function(){
 			{
 			 db.transaction(function(tx) {
 
-              tx.executeSql("UPDATE configuracion SET (sonido) VALUES (?) WHERE id = 1", [1],function(tx, res) {sonido=1;			   
+              tx.executeSql("UPDATE configuracion SET sonido = (?) WHERE id = 1", [1],function(tx, res) {sonido=1;			   
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
@@ -294,7 +294,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			 db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET (sonido) VALUES (?) WHERE id = 1",[0], function(tx, res) {sonido=0;			   
+              tx.executeSql("UPDATE configuracion SET sonido =  (?) WHERE id = 1",[0], function(tx, res) {sonido=0;			   
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
