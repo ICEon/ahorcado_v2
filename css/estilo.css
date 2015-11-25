@@ -2,9 +2,9 @@
  /* CSS Document */
  #palabra,
  #palabra_error
- {font-size:3em;
+ {font-size:2.5em;
   font-weight:bold;
-  letter-spacing:0.5em;
+  letter-spacing:0.2em;
   text-align:center;
  }
  .letras

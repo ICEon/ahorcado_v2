@@ -47,10 +47,8 @@ $(document).ready(function(e) {
 	var temp="";
 	var posicion_actual=0;
 	var letra_actual=0;
-	var vibrar=1;
-	var sonido=1;
-	var sonido=1;
-	var vibrar=1; 
+	var sonido=0;
+	var vibrar=0; 
 	function nueva_palabra_bd($id_palabra)
 	{ 
       oportunidades=3;
@@ -282,54 +280,58 @@ document.addEventListener("deviceready",function(){
 			 db.transaction(function(tx) {
 
               tx.executeSql("UPDATE configuracion SET sonido = (?) WHERE id = 1", [1],function(tx, res) {sonido=1;			   
+			  			$("#btn_sonido").removeClass('ui-icon-audio');
+			$("#btn_sonido").addClass('ui-icon-delete');
+			alert('El sonido se apagó');
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
              });
 
-			$("#btn_sonido").removeClass('ui-icon-audio');
-			$("#btn_sonido").addClass('ui-icon-delete');
-			alert('El sonido se apagó');
+
 			}
 		else
 			{
 			 db.transaction(function(tx) {
               tx.executeSql("UPDATE configuracion SET sonido =  (?) WHERE id = 1",[0], function(tx, res) {sonido=0;			   
-			    }, function(e) {
-            alert ("ERROR: " + e.message);			  
-			  }); 	   
-             });
 			$("#btn_sonido").removeClass('ui-icon-delete');
 			$("#btn_sonido").addClass('ui-icon-audio');
 			alert('El sonido se aprendió');
 			navigator.notification.beep(1);
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
+
 			}
 	});//click btn_sonido
 	
 	$("#btn_vibrar").on('click',function(){
 		if($("#btn_vibrar").hasClass('ui-icon-power'))
 			{db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET (vibrar) VALUES (?) WHERE id = 1", [1], function(tx, res) {vibrar = 1;
+              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [1], function(tx, res) {vibrar = 1;
+			  			$("#btn_vibrar").removeClass('ui-icon-power');
+			$("#btn_vibrar").addClass('ui-icon-delete');
+			alert('Se apagó la vibracion');
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
              });
-			$("#btn_vibrar").removeClass('ui-icon-power');
-			$("#btn_vibrar").addClass('ui-icon-delete');
-			alert('Se apagó la vibracion');
+
 			}
 		else
 			{
 			db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET (vibrar) VALUES (?) WHERE id = 1", [0], function(tx, res) {			vibrar = 0;   
+              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [0], function(tx, res) {			vibrar = 0;   
+			  			$("#btn_vibrar").removeClass('ui-icon-delete');
+			$("#btn_vibrar").addClass('ui-icon-power');
+			alert('Se aprendió la vibracion');
+			navigator.notification.vibrate(1000);
+
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
              });
-			$("#btn_vibrar").removeClass('ui-icon-delete');
-			$("#btn_vibrar").addClass('ui-icon-power');
-			alert('Se aprendió la vibracion');
-			navigator.notification.vibrate(1000);
 			}
 	});//click btn_vibrar
 }); //deviceready
