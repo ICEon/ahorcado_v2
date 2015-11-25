@@ -8,7 +8,7 @@
   text-align:center;
  }
  .letras
- {font-size:4em;
+ {font-size:3.5em;
   font-weight:bold;
   text-align:center;
   width:20%;
@@ -19,7 +19,7 @@
  
   .flechas
  {
-  font-size:4em;
+  font-size:3.5em;
   font-weight:bold;
   width:34%;
   padding:5px;
@@ -55,4 +55,10 @@
 .acierto
  {
 	color: #3F0; 
+ }
+ 
+ #imagen
+ {
+	margin: 0;
+	padding: 0; 
  }

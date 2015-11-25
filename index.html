@@ -64,7 +64,7 @@
  
  <!-- juego -->
  <div data-role="page" id="jugar" >   
-  <div data-role="header">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false">
     <a href="#principal" class="ui-btn ui-btn-left ui-btn-inline ui-corner-all ui-icon-home ui-btn-icon-left">Inicio</a>
     	<h1>Ahorcado</h1>
     <a href="#" id="btn_comenzar" class="ui-btn ui-btn-right ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-right">Comenzar</a>
@@ -102,7 +102,7 @@
   
   
   	<div align="center">
-  		<img id="imagen" src="recursos/imagenes/6.png"/ style="height:auto; margin-top:0;">
+  		<img id="imagen" src="recursos/imagenes/6.png"/ style="height:auto;">
     </div>
     <div id="palabra">
      &nbsp;
@@ -122,7 +122,7 @@
         </div>
     </div>
   </div>
-  <div data-role="footer" data-position="fixed">
+  <div data-role="footer" data-position="fixed" data-tap-toggle="false">
   	<h2>Palabras Encontradas: <span id="encontradas">0</span></h2>
   </div>
  </div>   
