@@ -98,7 +98,9 @@ alert (palabra_actual);
 	$('#actual').text(abecedario[0]);
 
 	posicion_actual=0; 
-	     $('.botones').attr('disabled',false);
+	     $('#anterior').attr('disabled',false);
+		 $('#actual').attr('disabled',false);
+ 	     $('#siguiente').attr('disabled',false);
     }
 });
 
@@ -203,7 +205,9 @@ alert (palabra_actual);
 
 		   if (oportunidades<=0)
 		    {
-				     $('.botones').attr('disabled',true);
+				    	     $('#anterior').attr('disabled',true);
+		 $('#actual').attr('disabled',true);
+ 	     $('#siguiente').attr('disabled',true);
 				$("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	 $("#palabra").removeClass("animated");   	 
 	 $("#palabra").removeClass("flipOutX");
@@ -248,7 +252,9 @@ alert (palabra_actual);
 	});
 	
 document.addEventListener("deviceready",function(){
-     $('.botones').attr('disabled',true);
+     	     $('#anterior').attr('disabled',true);
+		 $('#actual').attr('disabled',true);
+ 	     $('#siguiente').attr('disabled',true);
 	 conectar_base();
 	 
 	$('#btnJuego').on('tap', function(){
