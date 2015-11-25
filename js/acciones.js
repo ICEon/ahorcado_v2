@@ -1,4 +1,18 @@
 // JavaScript Document
+
+
+$(document).ready(function(e) {
+	var abecedario=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    var encontradas = 0;
+	var oportunidades=0;
+	var palabra_oculta="";
+	var palabra_actual="";
+	var temp="";
+	var posicion_actual=0;
+	var letra_actual=0;
+	var sonido=0;
+	var vibrar=0; 
+	
 function conectar_base()
  {
 
@@ -38,21 +52,9 @@ function conectar_base()
  }
  
 
-$(document).ready(function(e) {
-	var abecedario=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    var encontradas = 0;
-	var oportunidades=0;
-	var palabra_oculta="";
-	var palabra_actual="";
-	var temp="";
-	var posicion_actual=0;
-	var letra_actual=0;
-	var sonido=0;
-	var vibrar=0; 
-	
 	function nueva_palabra_bd($id_palabra)
 	{ 
-	$('#contenedor').attr('disabled','false');
+
       oportunidades=6;
 
 	  $('#imagen').attr('src', 'recursos/imagenes/' + oportunidades +'.png');
@@ -96,6 +98,7 @@ alert (palabra_actual);
 	$('#actual').text(abecedario[0]);
 
 	posicion_actual=0; 
+	     $('.botones').attr('disabled',false);
     }
 });
 
@@ -200,6 +203,7 @@ alert (palabra_actual);
 
 		   if (oportunidades<=0)
 		    {
+				     $('.botones').attr('disabled',true);
 				$("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	 $("#palabra").removeClass("animated");   	 
 	 $("#palabra").removeClass("flipOutX");
@@ -227,7 +231,7 @@ alert (palabra_actual);
 	  });
 	 }, 1000);
 	 
-	 
+
 	  });
 				
 				});
@@ -244,7 +248,7 @@ alert (palabra_actual);
 	});
 	
 document.addEventListener("deviceready",function(){
-     
+     $('.botones').attr('disabled',true);
 	 conectar_base();
 	 
 	$('#btnJuego').on('tap', function(){
@@ -347,7 +351,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [2], function(tx, res) {
+              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [0], function(tx, res) {
 				  vibrar = 1;
 			  			$("#btn_vibrar").removeClass('ui-icon-delete');
 			$("#btn_vibrar").addClass('ui-icon-power');
