@@ -98,7 +98,7 @@ alert (palabra_actual);
 	$('#actual').text(abecedario[0]);
 
 	posicion_actual=0; 
-	     $('#contenedor').css('display', 'none')
+	     $('#contenedor').css('display', '')
 
     }
 });
@@ -140,8 +140,8 @@ alert (palabra_actual);
 	    if (palabra_oculta != temp)
 		 {
 			if (sonido == 1)
-			  {
-				navigator.notification.beep(2);	    
+			  {				  
+				audio.play('acierto');
 			  }
 		  $("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	 $("#palabra").removeClass("animated");   	 
@@ -161,7 +161,7 @@ alert (palabra_actual);
 		 $("#palabra").addClass('acierto');
 		 			 if (sonido == 1)
 			  {
-				navigator.notification.beep(3);	    
+				audio.play('win');    
 			  }
 			 $("#palabra").addClass("animated tada").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
@@ -193,7 +193,7 @@ alert (palabra_actual);
 			  }
 			 if (sonido == 1)
 			  {
-				navigator.notification.beep(1);	    
+				audio.play('error');
 			  }
  		  $("#palabra").addClass("animated shake").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		  
@@ -204,7 +204,12 @@ alert (palabra_actual);
 
 		   if (oportunidades<=0)
 		    {
-  	 $('#contenedor').css('display', '')
+							 if (sonido == 1)
+			  {
+				audio.play('fail');
+			  }
+
+  	 $('#contenedor').css('display', 'none')
 				$("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	 $("#palabra").removeClass("animated");   	 
 	 $("#palabra").removeClass("flipOutX");
@@ -249,7 +254,25 @@ alert (palabra_actual);
 	});
 	
 document.addEventListener("deviceready",function(){
-  	 $('#contenedor').css('display', '')
+	
+	
+  	 $('#contenedor').css('display', 'none')
+	 
+audio = window.plugins.LowLatencyAudio;	
+audio.preloadFX('error', 'recursos/sonidos/error.mp3', function(msg){}, function(msg){ alert( 'Error: ' + msg ); });	
+audio.preloadFX('fail', 'recursos/sonidos/fail.mp3', function(msg){}, function(msg){ alert( 'Error: ' + msg ); });	
+audio.preloadFX('win', 'recursos/sonidos/win.mp3', function(msg){}, function(msg){ alert( 'Error: ' + msg ); });
+audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, function(msg){ alert( 'Error: ' + msg ); });	
+
+
+
+
+
+
+
+
+
+	 
 	 conectar_base();
 	 
 	$('#btnJuego').on('tap', function(){
