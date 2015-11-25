@@ -21,8 +21,6 @@ function conectar_base()
         tx.executeSql("select sonido, vibrar from configuracion", [], function(tx, res) {
 	 sonido=res.rows.item(0).sonido;
 	 vibrar=res.rows.item(0).vibrar;
-	 alert ("bd sonido: " + res.rows.item(0).sonido);
-	 alert ("bd vibrar: " + res.rows.item(0).vibrar);
           if (res.rows.item(0).sonido == 0)
 		   {
 		    $("#btn_sonido").removeClass('ui-icon-audio');
@@ -189,7 +187,7 @@ alert (palabra_actual);
 			 oportunidades = oportunidades - 1;
 			 if (vibrar == 1)
 			  {
-             navigator.notification.vibrate(1000);
+             navigator.notification.vibrate(500);
 			  }
 			 if (sonido == 1)
 			  {
@@ -204,10 +202,7 @@ alert (palabra_actual);
 
 		   if (oportunidades<=0)
 		    {
-							 if (sonido == 1)
-			  {
-				audio.play('fail');
-			  }
+
 
   	 $('#contenedor').css('display', 'none')
 				$("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -225,6 +220,10 @@ alert (palabra_actual);
  $('#palabra_error').text(palabra_actual);
 	 $('#palabra_error').css('display','inline-block');
 	 setTimeout(function(){  
+	 							 if (sonido == 1)
+			  {
+				audio.play('fail');
+			  }
 	 $("#palabra_error").addClass("animated hinge").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
 
@@ -380,7 +379,7 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 			  			$("#btn_vibrar").removeClass('ui-icon-delete');
 			$("#btn_vibrar").addClass('ui-icon-power');
 			alert('Se aprendió la vibracion');
-			navigator.notification.vibrate(1000);
+			navigator.notification.vibrate(500);
 
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
