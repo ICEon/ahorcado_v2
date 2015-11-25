@@ -226,9 +226,12 @@ alert (palabra_actual);
 	});
 	
 document.addEventListener("deviceready",function(){
-     alert ($('#principal').css(width));	
+     
 	 conectar_base();
 	 
+	$('#btnJuego').on('tap', function(){
+	   alert ($('#principal').css('width'));
+	});
 	
 	$('#btn_otra').on('tap', function(){
 		  $("#acierto").popup("close");	 
