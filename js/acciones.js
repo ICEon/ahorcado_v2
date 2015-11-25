@@ -52,6 +52,7 @@ $(document).ready(function(e) {
 	
 	function nueva_palabra_bd($id_palabra)
 	{ 
+	$('#contenedor').attr('disabled','false');
       oportunidades=6;
 
 	  $('#imagen').attr('src', 'recursos/imagenes/' + oportunidades +'.png');
@@ -346,7 +347,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [0], function(tx, res) {
+              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [2], function(tx, res) {
 				  vibrar = 1;
 			  			$("#btn_vibrar").removeClass('ui-icon-delete');
 			$("#btn_vibrar").addClass('ui-icon-power');
