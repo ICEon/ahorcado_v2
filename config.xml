@@ -40,6 +40,7 @@
 
    <!-- Third party plugins -->  
    <gap:plugin name="com.brodysoft.sqliteplugin" version="1.0.6" />
+   <gap:plugin name="com.rjfun.cordova.plugin.lowlatencyaudio" version="1.0" />
 
    
    <!-- Define los iconos de la aplicacion para cada plataforma -->  
