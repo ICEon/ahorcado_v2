@@ -219,11 +219,12 @@ alert (palabra_actual);
 	 $('#palabra').css('display', 'none');
  $('#palabra_error').text(palabra_actual);
 	 $('#palabra_error').css('display','inline-block');
-	 setTimeout(function(){  
-	 							 if (sonido == 1)
+	 					 if (sonido == 1)
 			  {
 				audio.play('fail');
 			  }
+	 setTimeout(function(){  
+	 		
 	 $("#palabra_error").addClass("animated hinge").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
 
@@ -234,7 +235,7 @@ alert (palabra_actual);
   $("#error").popup("open");	 
   		$('#btn_comenzar').css('visibility','visible');
 	  });
-	 }, 1000);
+	 }, 500);
 	 
 
 	  });
@@ -348,7 +349,8 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 			$("#btn_sonido").removeClass('ui-icon-delete');
 			$("#btn_sonido").addClass('ui-icon-audio');
 			alert('El sonido se aprendió');
-			navigator.notification.beep(1);
+								audio.play('acierto');
+			  
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
