@@ -1,6 +1,7 @@
 @charset "utf-8";
  /* CSS Document */
- #palabra
+ #palabra,
+ #palabra_error
  {font-size:3em;
   font-weight:bold;
   letter-spacing:0.5em;
@@ -20,3 +21,25 @@
 #encontradas
 { color:#F00;
 }
+
+#palabra
+ {
+	 -webkit-animation-duration: 0.7s;
+ }
+ 
+#palabra_error
+ {
+	  -webkit-animation-duration: 2s;
+ }
+ 
+
+.error
+ {
+	 
+	    color:#F00;
+ }
+ 
+.acierto
+ {
+	color: #3F0; 
+ }

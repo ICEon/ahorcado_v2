@@ -22,7 +22,6 @@
  </head>
 
  <body>
- 
  <!-- Principal -->
  <div data-role="page" id="principal" >   
   <div data-role="header">
@@ -89,7 +88,8 @@
       <div data-role="main" class="ui-content">
        <div align="center">
          <i class="ion-checkmark-circled grande">Has encontrado la palabra oculta</i>
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Continuar</a>
+         <div>Total de palabras encontradas: <span id="contador">&nbsp;</span></div>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" id="btn_otra">Continuar</a>
        </div>
       </div>
     </div> 
@@ -102,6 +102,11 @@
     <div id="palabra">
      &nbsp;
     </div>                                         
+    <div align="center">
+     <div id="palabra_error" style="display:none; color:#F00;">
+&nbsp;
+          </span>
+    </div>
     <div id="contenedor">
     	<div id="anterior" class="letras">
         	<i class="ion-chevron-left grande"> </i>
@@ -112,7 +117,7 @@
         </div>
     </div>
   </div>
-  <div data-role="footer">
+  <div data-role="footer" data-position="fixed">
   	<h2>Palabras Encontradas: <span id="encontradas">0</span></h2>
   </div>
  </div>   

@@ -1,7 +1,45 @@
 // JavaScript Document
+function conectar_base()
+ {
+
+			db = window.sqlitePlugin.openDatabase({name: "preferencias.db", createFromLocation: 1});
+						db.transaction(function(tx) {
+        tx.executeSql("select sonido, vibrar from configuracion", [], function(tx, res) {
+	 sonido=res.rows.item(0).sonido;
+	 vibrar=res.rows.item(0).vibrar;
+          if (res.rows.item(0).sonido == 0)
+		   {
+		    $("#btn_sonido").removeClass('ui-icon-audio');
+			$("#btn_sonido").addClass('ui-icon-delete');
+			
+		   }
+		  else
+		   {
+	 		$("#btn_sonido").removeClass('ui-icon-delete');
+			$("#btn_sonido").addClass('ui-icon-audio');
+			   
+		   }
+		   
+		   if (res.rows.item(0).vibrar == 0)
+		   {
+			  		$("#btn_vibrar").removeClass('ui-icon-power');
+			$("#btn_vibrar").addClass('ui-icon-delete');
+		   }
+		  else
+		   {
+			   		$("#btn_vibrar").removeClass('ui-icon-delete');
+			$("#btn_vibrar").addClass('ui-icon-power');
+		   }
+		  
+        });
+      });
+
+ }
+ 
+
 $(document).ready(function(e) {
 	var abecedario=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-
+    var encontradas = 0;
 	var oportunidades=0;
 	var imagen_actual=0;
 	var palabra_oculta="";
@@ -9,16 +47,22 @@ $(document).ready(function(e) {
 	var temp="";
 	var posicion_actual=0;
 	var letra_actual=0;
-	var palabra=[];
 	var vibrar=1;
 	var sonido=1;
-	
+	var sonido=1;
+	var vibrar=1; 
 	function nueva_palabra_bd($id_palabra)
 	{ 
-     var oportunidades=6;
-     var imagen_actual=0;
+      oportunidades=3;
+      imagen_actual=0;
+	  
+  	 $('#palabra').css('display', '')
+	 $('#palabra_error').text('');
+	 $('#palabra_error').css('display','none');
+	  
+	  $('#palabra').removeClass("error");
+      $("#palabra").removeClass('acierto');
 
-//     alert ($datos);
 		$.ajax({
 			type: "POST",
 			url: "http://192.168.1.30/buscar_palabra.php",
@@ -26,6 +70,12 @@ $(document).ready(function(e) {
 		}).done(function(msj){
 			
            palabra_actual = msj.substring(1, msj.length-1);
+
+
+
+				
+alert (palabra_actual);
+         //palabra_actual = "E JE";
 		   	 palabra_oculta="";
 	 for(x=0;x<palabra_actual.length;x++)
 	 	{
@@ -33,31 +83,33 @@ $(document).ready(function(e) {
 			 {
 		 	palabra_oculta=palabra_oculta + "_";
 			 }
+			 else
+			 {				 
  		    palabra_oculta=palabra_oculta + " ";
+			 }
 		}
-		
 	$('#palabra').text(palabra_oculta);
 	$('#actual').text(abecedario[0]);
-	alert(palabra_actual);
+
 	posicion_actual=0; 
-
-		});
-				
-
-
-		
+		});		
 	}
 	
 	$('#actual').on('tap', function(){
+			
 		letra_actual = $('#actual').html();
 		temp = "";
 	 for (x=0; x<palabra_actual.length;x++)
 	  {
 		  
-		  
-		if (""+palabra_actual.charAt(x) == letra_actual.charAt(0))
+
+        if (palabra_actual.charAt(x) == " ")
 		 {
-			 alert ("dentro" + letra_actual);
+			temp = temp + " "; 
+		 }
+		else if (palabra_actual.charAt(x) == letra_actual.charAt(0))
+		 {
+
 		  temp = temp + letra_actual;
 		  
 		 }
@@ -66,28 +118,128 @@ $(document).ready(function(e) {
 		  temp = temp + palabra_oculta.charAt(x); 
 		 }
 	  }
-	  alert ("palabra oculta " + palabra_oculta);
-	  	  alert ("palabra temporal " + temp);
 	    if (palabra_oculta != temp)
 		 {
-          alert ("cambio");
-		  $("#palabra").addClass("flip animated");
-		  palabra_oculta = temp;
+			if (sonido == 1)
+			  {
+				navigator.notification.beep(2);	    
+			  }
+		  $("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	 $("#palabra").removeClass("animated");   	 
+	 $("#palabra").removeClass("flipOutX");
+	 		  		  palabra_oculta = temp;
+					  
+
+					  
 		  $('#palabra').text(palabra_oculta);		
-  		  $("#palabra").removeClass("flip animated");  
+	  $("#palabra").addClass("animated flipInX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+
+		  	 $("#palabra").removeClass("animated");   	 
+	 $("#palabra").removeClass("flipInX");
+	 
+	  		if (palabra_oculta == palabra_actual)
+		 { 
+		 $("#palabra").addClass('acierto');
+		 			 if (sonido == 1)
+			  {
+				navigator.notification.beep(3);	    
+			  }
+			 $("#palabra").addClass("animated tada").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+
+		  	 $("#palabra").removeClass("animated");   	 
+	 $("#palabra").removeClass("tada");
+	 $("#encontradas").text(parseInt($("#encontradas").text())+1);
+	 $("#contador").text(	 $("#encontradas").text());
+	 
+			 	   $("#acierto").popup();
+  $("#acierto").popup("open");	 
+  
+			 });
+		 }
+
+	  });
+
+
+
+		  });
+
+		  
 		 }
 		else
 		 {
- 		  $("#palabra").addClass("shake animated");
-			 //shake
+			 oportunidades = oportunidades - 1;
+			 if (vibrar == 1)
+			  {
+             navigator.notification.vibrate(1000);
+			  }
+			 if (sonido == 1)
+			  {
+				navigator.notification.beep(1);	    
+			  }
+ 		  $("#palabra").addClass("animated shake").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		  
+
+			$("#palabra").removeClass("animated");   	 
+	        $("#palabra").removeClass("shake");  	 
+
+		   if (oportunidades<=0)
+		    {
+				$("#palabra").addClass("animated flipOutX").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	 $("#palabra").removeClass("animated");   	 
+	 $("#palabra").removeClass("flipOutX");
+	
+	$('#palabra').addClass("error"); 
+	$('#palabra').text(palabra_actual);
+	
+				$("#palabra").addClass("animated flash").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+
+		  	 $("#palabra").removeClass("animated");   	 
+	 $("#palabra").removeClass("flash");
+	 $('#palabra').css('display', 'none');
+ $('#palabra_error').text(palabra_actual);
+	 $('#palabra_error').css('display','inline-block');
+	 setTimeout(function(){  
+	 $("#palabra_error").addClass("animated hinge").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+
+
+		  	 $("#palabra_error").removeClass("animated");   	 
+	 $("#palabra_error").removeClass("hinge");
+	 $('#palabra_error').text("");
+	   $("#error").popup();
+  $("#error").popup("open");	 
+  		$('#btn_comenzar').css('visibility','visible');
+	  });
+	 }, 1000);
+	 
+	 
+	  });
+				
+				});
+				
+			}
+		  
+
+	 
+	 // si no hay oportunidades
+		  });
+		
 		 }
 		
 	});
 	
-//document.addEventListener("deviceready",function(){
+document.addEventListener("deviceready",function(){
+	
+	 conectar_base();
+	 
+	
+	$('#btn_otra').on('tap', function(){
+		  $("#acierto").popup("close");	 
+	   nueva_palabra_bd(Math.floor((Math.random() * 89) + 1));
+	});
 	$('#btn_comenzar').on('tap',function(){
 		$('#encontradas').text('0');		
 		nueva_palabra_bd(Math.floor((Math.random() * 89) + 1));
+		$('#btn_comenzar').css('visibility', 'hidden');
 		
 	});
 	
@@ -126,34 +278,59 @@ $(document).ready(function(e) {
 	
 	$("#btn_sonido").on('click',function(){
 		if($("#btn_sonido").hasClass('ui-icon-audio'))
-			{//sonido=0;
+			{
+			 db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET sonido = 0 WHERE id = 1", function(tx, res) {			   
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
+
 			$("#btn_sonido").removeClass('ui-icon-audio');
 			$("#btn_sonido").addClass('ui-icon-delete');
 			alert('El sonido se apagó');
 			}
 		else
-			{//sonido=1;
+			{
+			 db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET sonido = 1 WHERE id = 1", function(tx, res) {			   
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
 			$("#btn_sonido").removeClass('ui-icon-delete');
 			$("#btn_sonido").addClass('ui-icon-audio');
 			alert('El sonido se aprendió');
 			navigator.notification.beep(1);
 			}
 	});//click btn_sonido
+	
 	$("#btn_vibrar").on('click',function(){
 		if($("#btn_vibrar").hasClass('ui-icon-power'))
-			{//vibrar=0;
+			{db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET vibrar = 0 WHERE id = 1", function(tx, res) {			   
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
 			$("#btn_vibrar").removeClass('ui-icon-power');
 			$("#btn_vibrar").addClass('ui-icon-delete');
 			alert('Se apagó la vibracion');
 			}
 		else
-			{//vibrar=1;
+			{
+			db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET vibrar = 1 WHERE id = 1", function(tx, res) {			   
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
 			$("#btn_vibrar").removeClass('ui-icon-delete');
 			$("#btn_vibrar").addClass('ui-icon-power');
 			alert('Se aprendió la vibracion');
 			navigator.notification.vibrate(1000);
 			}
 	});//click btn_vibrar
-//}); //deviceready
+}); //deviceready
 });//ready
 
