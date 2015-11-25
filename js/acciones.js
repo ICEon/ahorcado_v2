@@ -49,6 +49,7 @@ $(document).ready(function(e) {
 	var letra_actual=0;
 	var sonido=0;
 	var vibrar=0; 
+	
 	function nueva_palabra_bd($id_palabra)
 	{ 
       oportunidades=6;
@@ -62,12 +63,15 @@ $(document).ready(function(e) {
 	  $('#palabra').removeClass("error");
       $("#palabra").removeClass('acierto');
 
-		$.ajax({
-			type: "POST",
-			url: "http://192.168.1.30/buscar_palabra.php",
-			data: "clave=" + $id_palabra
-		}).done(function(msj){
-			
+$.ajax({
+	type: "POST",
+	url: "http://192.168.1.30/buscar_palabra.php",
+	data: "clave=" + $id_palabra,
+    error : function (){ 
+	alert ("no se recibe respuesta del servidor");
+	}, 
+    success: function (msj) 
+	{
            palabra_actual = msj.substring(1, msj.length-1);
 palabra_actual = palabra_actual.toUpperCase();
 
@@ -91,7 +95,17 @@ alert (palabra_actual);
 	$('#actual').text(abecedario[0]);
 
 	posicion_actual=0; 
-		});		
+    }
+});
+
+/*		$.ajax({
+			type: "POST",
+			url: "http://192.168.1.30/buscar_palabra.php",
+			data: "clave=" + $id_palabra
+		}).done(function(msj){
+			
+
+		});		*/
 	}
 	
 	$('#actual').on('tap', function(){
