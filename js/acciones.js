@@ -9,7 +9,7 @@ function conectar_base()
 	 vibrar=res.rows.item(0).vibrar;
 	 alert ("bd sonido: " + res.rows.item(0).sonido);
 	 alert ("bd vibrar: " + res.rows.item(0).vibrar);
-          if (res.rows.item(0).sonido == 1)
+          if (res.rows.item(0).sonido == 0)
 		   {
 		    $("#btn_sonido").removeClass('ui-icon-audio');
 			$("#btn_sonido").addClass('ui-icon-delete');			
@@ -21,7 +21,7 @@ function conectar_base()
 			   
 		   }
 		   
-		   if (res.rows.item(0).vibrar == 1)
+		   if (res.rows.item(0).vibrar == 0)
 		   {
 			  		$("#btn_vibrar").removeClass('ui-icon-power');
 			$("#btn_vibrar").addClass('ui-icon-delete');
@@ -181,6 +181,7 @@ alert (palabra_actual);
 
 			$("#palabra").removeClass("animated");   	 
 	        $("#palabra").removeClass("shake");  	 
+			$('#imagen').attr('src', 'recursos/imagenes/' + oportunidades +'.png');
 
 		   if (oportunidades<=0)
 		    {
@@ -232,7 +233,7 @@ document.addEventListener("deviceready",function(){
 	 conectar_base();
 	 
 	$('#btnJuego').on('tap', function(){
-	   var ancho = ($('#principal').width()/6);
+	   var ancho = ($('#principal').width()/6.5);
 	   $('#imagen').width(ancho);
 	});
 	
