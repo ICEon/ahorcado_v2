@@ -305,7 +305,7 @@ document.addEventListener("deviceready",function(){
 			{
 			 db.transaction(function(tx) {
 
-              tx.executeSql("UPDATE configuracion SET sonido = (?) WHERE id = 1", [1], function(tx, res) {
+              tx.executeSql("UPDATE configuracion SET sonido = (?) WHERE id = 1", [0], function(tx, res) {
 				  sonido=0;
 			  			$("#btn_sonido").removeClass('ui-icon-audio');
 			$("#btn_sonido").addClass('ui-icon-delete');
@@ -320,7 +320,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			 db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET sonido = (?) WHERE id = 1", [0], function(tx, res) {
+              tx.executeSql("UPDATE configuracion SET sonido = (?) WHERE id = 1", [1], function(tx, res) {
 				  sonido=1;
 			$("#btn_sonido").removeClass('ui-icon-delete');
 			$("#btn_sonido").addClass('ui-icon-audio');
@@ -337,7 +337,7 @@ document.addEventListener("deviceready",function(){
 	$("#btn_vibrar").on('click',function(){
 		if($("#btn_vibrar").hasClass('ui-icon-power'))
 			{db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [1], function(tx, res) {
+              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [0], function(tx, res) {
 				  vibrar = 0;
 			  			$("#btn_vibrar").removeClass('ui-icon-power');
 			$("#btn_vibrar").addClass('ui-icon-delete');
@@ -351,7 +351,7 @@ document.addEventListener("deviceready",function(){
 		else
 			{
 			db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [0], function(tx, res) {
+              tx.executeSql("UPDATE configuracion SET vibrar = (?) WHERE id = 1", [1], function(tx, res) {
 				  vibrar = 1;
 			  			$("#btn_vibrar").removeClass('ui-icon-delete');
 			$("#btn_vibrar").addClass('ui-icon-power');
