@@ -94,6 +94,7 @@ alert (palabra_actual);
 	}
 	
 	$('#actual').on('tap', function(){
+			alert ("sonido: " + sonido + " vibrar: " + vibrar);
 			
 		letra_actual = $('#actual').html();
 		temp = "";
