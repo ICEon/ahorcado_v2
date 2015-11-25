@@ -232,7 +232,7 @@ document.addEventListener("deviceready",function(){
 	$('#btnJuego').on('tap', function(){
 	   var ancho = ($('#principal').width()/4);
 	   alert (ancho);
-	   $('#imagen').css('width', ancho);
+	   $('#imagen').width(ancho);
 	});
 	
 	$('#btn_otra').on('tap', function(){
