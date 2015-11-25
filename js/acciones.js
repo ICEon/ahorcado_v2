@@ -226,7 +226,7 @@ alert (palabra_actual);
 	});
 	
 document.addEventListener("deviceready",function(){
-	
+     alert ($('#principal').css(width));	
 	 conectar_base();
 	 
 	
