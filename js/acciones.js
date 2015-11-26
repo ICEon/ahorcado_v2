@@ -86,7 +86,7 @@ function conectar_base()
 
 	if (alterna == 1)
  {
-	$datos = "alterna= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
+	$datos = "alternas= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
 	$url =  $('#txturl').val();
  }
  else
@@ -439,7 +439,7 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
 
     $('#conexion').on("change", function(e){
-	 
+	 alert (this.value);
 		 	db.transaction(function(tx) {
               tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [this.value], function(tx, res) {
 				  alert ('Se actualizaron los datos de conexion');
