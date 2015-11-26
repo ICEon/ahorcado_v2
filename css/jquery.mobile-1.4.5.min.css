@@ -41,3 +41,5 @@ border:  0;}
 	background-image: url("../images/icons-png/gatito-png.png");
 	    background-size: 18px 18px;
 }
+
+.containing-element .ui-slider-switch { width: 9em }

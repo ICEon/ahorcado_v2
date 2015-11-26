@@ -30,6 +30,7 @@
 
   <div data-role="main" class="ui-content">
   	<div align="center">
+
     	<div data-role="controlgroup" style="width:65%">
     		<a href="#jugar" class="ui-btn ui-btn-corner-all ui-icon-check ui-btn-icon-right" id="btnJuego">Jugar</a>
     		<a href="#opciones" class="ui-btn ui-btn-corner-all ui-icon-gear ui-btn-icon-right">Opciones</a>
@@ -48,14 +49,30 @@
 
   <div data-role="main" class="ui-content">
     <div align="center">
-    	<div data-role="controlgroup" style="width:65%">
+    	<div data-role="controlgroup" style="width:50%">
     		<a href="#sonido" id="btn_sonido" class="ui-btn ui-btn-corner-all ui-icon-audio ui-btn-icon-right">Sonido</a>
     		<a href="#vibrar" id="btn_vibrar" class="ui-btn ui-btn-corner-all ui-icon-power ui-btn-icon-right">Vibrar</a>
   		</div>
         <br>
-        <div>
-           <input type="text" name="" placeholder="">
+    <div class="containing-element">
+	 <label for="conexion">Conexion a utilizar:</label>
+	 <select name="conexion" id="conexion" data-role="slider">
+	  <option value="0">Default</option>
+	  <option value="1">Alterna</option>
+	 </select>
+    </div>
+        <div align="center">
+         <div style="width:70%; ">
+           <input type="text" name="txurl" id="txturl" placeholder="URL o IP" class="alterna">
+           <h6> URL sin prefijo http://</h6>
+           <input type="text" name="txthost" id="txthost" placeholder="Nombre del host" class="alterna">
+           <input type="text" name="txtbase" id="txtbase" placeholder="Nombre de la base de datos" class="alterna">
+           <input type="text" name="txtusuario" id="txtusuraio" placeholder="Nombre de usuario" class="alterna">
+           <input type="text" name="txtpassword" id="txtpassword" placeholder="Password de usuario" class="alterna">
+<br>
 
+           <a href="#" class="ui-btn ui-btn-corner-all ui-icon-cloud ui-btn-icon-right">Actualizar conexion</a>
+          </div>
         </div>
   	</div>
   </div>

@@ -12,41 +12,61 @@ $(document).ready(function(e) {
 	var letra_actual=0;
 	var sonido=0;
 	var vibrar=0; 
-	
+	var alterna = 0;
 function conectar_base()
  {
-
-			db = window.sqlitePlugin.openDatabase({name: "preferencias.db", createFromLocation: 1});
-						db.transaction(function(tx) {
-        tx.executeSql("select sonido, vibrar from configuracion", [], function(tx, res) {
-	 sonido=res.rows.item(0).sonido;
-	 vibrar=res.rows.item(0).vibrar;
-          if (res.rows.item(0).sonido == 0)
-		   {
-		    $("#btn_sonido").removeClass('ui-icon-audio');
-			$("#btn_sonido").addClass('ui-icon-delete');			
-		   }
-		  else
-		   {
-	 		$("#btn_sonido").removeClass('ui-icon-delete');
-			$("#btn_sonido").addClass('ui-icon-audio');
-			   
-		   }
+  db = window.sqlitePlugin.openDatabase({name: "preferencias.db", createFromLocation: 1});
+  
+  db.transaction(function(tx) {
+  tx.executeSql("select * from configuracion", [], function(tx, res) {
+  sonido=res.rows.item(0).sonido;
+  vibrar=res.rows.item(0).vibrar;
+  
+   if (res.rows.item(0).sonido == 0)
+    {
+ 	 $("#btn_sonido").removeClass('ui-icon-audio');
+	 $("#btn_sonido").addClass('ui-icon-delete');			
+    }
+   else
+    {
+     $("#btn_sonido").removeClass('ui-icon-delete');
+     $("#btn_sonido").addClass('ui-icon-audio');   
+    }
 		   
-		   if (res.rows.item(0).vibrar == 0)
-		   {
-			  		$("#btn_vibrar").removeClass('ui-icon-power');
-			$("#btn_vibrar").addClass('ui-icon-delete');
-		   }
-		  else
-		   {
-			   		$("#btn_vibrar").removeClass('ui-icon-delete');
-			$("#btn_vibrar").addClass('ui-icon-power');
-		   }
-		  
-        });
-      });
-
+   if (res.rows.item(0).vibrar == 0)
+    {
+	 $("#btn_vibrar").removeClass('ui-icon-power');
+	 $("#btn_vibrar").addClass('ui-icon-delete');
+    }
+   else
+    {
+ 	 $("#btn_vibrar").removeClass('ui-icon-delete');
+	 $("#btn_vibrar").addClass('ui-icon-power');
+    }
+   
+   if (res.rows.item(0).alterna == 1)
+    {
+	                $('#txturl').val(res.rows.item(0).url);
+					$('#txthost').val(res.rows.item(0).host);
+					$('#txtbase').val(res.rows.item(0).base);
+					$('#txtusuraio').val(res.rows.item(0).usuario);
+					$('#txtpassword').val(res.rows.item(0).password);
+					alterna = 0;
+		 $("#conexion")
+            .off("change")
+            .val('1')
+            .flipswitch('refresh');
+					 			$('.alterna').prop('readonly', false);
+	}
+	else
+	 {
+		 					alterna = 1;
+		 			$('.alterna').prop('readonly', true);
+	 }
+   });   
+  });
+  
+  
  }
  
 
@@ -64,10 +84,25 @@ function conectar_base()
 	  $('#palabra').removeClass("error");
       $("#palabra").removeClass('acierto');
 
+	if (alterna == 1)
+ {
+	$datos = "alterna= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
+	$url =  $('#txturl').val();
+ }
+ else
+  {
+	 $datos =  "clave=" + $id_palabra;
+	 $url = "cbtis16dam.byethost5.com";
+  }
+// verificar si default o alterna
 $.ajax({
+
+
+
+	
 	type: "POST",
-	url: "http://192.168.1.30/buscar_palabra.php",
-	data: "clave=" + $id_palabra,
+	url: "http://"+$url+"/palabras/buscar_palabra.php",
+	data: $datos,
     error : function (){ 
 	alert ("no se recibe respuesta del servidor");
 	}, 
@@ -99,7 +134,20 @@ palabra_actual = palabra_actual.toUpperCase();
 	     $('#contenedor').css('display', '')
 
     }
-});
+});	
+	
+	
+
+
+
+	   
+
+	   
+
+					
+
+
+
 
 /*		$.ajax({
 			type: "POST",
@@ -256,6 +304,7 @@ palabra_actual = palabra_actual.toUpperCase();
 	
 document.addEventListener("deviceready",function(){
 	
+
 	
   	 $('#contenedor').css('display', 'none')
 	 
@@ -266,16 +315,9 @@ audio.preloadFX('win', 'recursos/sonidos/win.mp3', function(msg){}, function(msg
 audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, function(msg){ alert( 'Error: ' + msg ); });	
 
 
-
-
-
-
-
-
-
-	 
 	 conectar_base();
 	 
+ 
 	$('#btnJuego').on('tap', function(){
 	   var ancho = ($('#principal').width()/6.5);
 	   $('#imagen').width(ancho);
@@ -390,6 +432,44 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
              });
 			}
 	});//click btn_vibrar
-}); //deviceready
-});//ready
+
+  
+
+
+
+
+    $('#conexion').on("change", function(e){
+	 
+		 	db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [this.value], function(tx, res) {
+				  alert ('Se actualizaron los datos de conexion');
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
+
+		 if (this.value == 0)
+		  {			
+		  					alterna = 1;
+			$('.alterna').prop('readonly', true);
+			$('.alterna').val('');			
+		  }
+		  else
+		   {
+			   					alterna = 0;
+			     db.transaction(function(tx) {
+                  tx.executeSql("select * from configuracion", [], function(tx, res) {                    
+                    $('#txturl').val(res.rows.item(0).url);
+					$('#txthost').val(res.rows.item(0).host);
+					$('#txtbase').val(res.rows.item(0).base);
+					$('#txtusuraio').val(res.rows.item(0).usuario);
+					$('#txtpassword').val(res.rows.item(0).password);
+                    });
+				 });
+			   $('.alterna').prop('readonly', false);
+		   }
+		});
+		
+}); //deviceready		
+		});//ready
 
