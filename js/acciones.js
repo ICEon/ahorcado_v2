@@ -85,7 +85,7 @@ function conectar_base()
       $("#palabra").removeClass('acierto');
 
 alert ("alterna: " + alterna);
-alterna = 0;
+alterna = 1;
 	if (alterna == 1)
  {
 	$datos = "alternas= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
@@ -100,7 +100,7 @@ alterna = 0;
 $.ajax({
 	
 	type: "POST",
-	url: "http://cbtis16dam.byethost5.com/palabras/buscar_palabra.php",
+	url: "http://"+$url+"/palabras/buscar_palabra.php",
 	data: "clave=" + $id_palabra,
     error : function (){ 
 	alert ("no se recibe respuesta del servidor");
