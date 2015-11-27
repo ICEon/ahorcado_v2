@@ -100,8 +100,8 @@ alterna = 0;
 $.ajax({
 	
 	type: "POST",
-	url: "http://"+$url+"/palabras/buscar_palabra.php",
-	data: $datos,
+	url: "http://cbtis16dam.byethost5.com/palabras/buscar_palabra.php",
+	data: "clave=" + $id_palabra,
     error : function (){ 
 	alert ("no se recibe respuesta del servidor");
 	}, 
