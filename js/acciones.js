@@ -108,6 +108,7 @@ $.ajax({
 	}, 
     success: function (msj) 
 	{
+		alert (msj);
            palabra_actual = msj.substring(1, msj.length-1);
 palabra_actual = palabra_actual.toUpperCase();
 
@@ -439,7 +440,8 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
 
     $('#conexion').on("change", function(e){
-	 alert (this.value);
+		alert ("conexion: " + $(this).val());
+//	 alert (this.value);
 		 	db.transaction(function(tx) {
               tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [this.value], function(tx, res) {
 				  alert ('Se actualizaron los datos de conexion');
