@@ -84,6 +84,8 @@ function conectar_base()
 	  $('#palabra').removeClass("error");
       $("#palabra").removeClass('acierto');
 
+alert ("alterna: " + alterna);
+alterna = 0;
 	if (alterna == 1)
  {
 	$datos = "alternas= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
@@ -92,13 +94,10 @@ function conectar_base()
  else
   {
 	 $datos =  "clave=" + $id_palabra;
-	 $url = "www.cbtis16dam.byethost5.com";
+	 $url = "cbtis16dam.byethost5.com";
   }
 // verificar si default o alterna
 $.ajax({
-
-
-
 	
 	type: "POST",
 	url: "http://"+$url+"/palabras/buscar_palabra.php",
@@ -137,18 +136,6 @@ palabra_actual = palabra_actual.toUpperCase();
     }
 });	
 	
-	
-
-
-
-	   
-
-	   
-
-					
-
-
-
 
 /*		$.ajax({
 			type: "POST",
