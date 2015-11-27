@@ -92,7 +92,7 @@ function conectar_base()
  else
   {
 	 $datos =  "clave=" + $id_palabra;
-	 $url = "cbtis16dam.byethost5.com";
+	 $url = "www.cbtis16dam.byethost5.com";
   }
 // verificar si default o alterna
 $.ajax({
