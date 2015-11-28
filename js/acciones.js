@@ -127,7 +127,7 @@ palabra_actual = palabra_actual.toUpperCase();
  		    palabra_oculta=palabra_oculta + " ";
 			 }
 		}
-	$('#palabra').text(palabra_oculta);
+	$('#palabra').text(msj);
 	$('#actual').text(abecedario[0]);
 
 	posicion_actual=0; 
