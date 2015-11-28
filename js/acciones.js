@@ -85,7 +85,7 @@ function conectar_base()
       $("#palabra").removeClass('acierto');
 
 alert ("alterna: " + alterna);
-alterna = 1;
+
 	if (alterna == 1)
  {
 	$datos = "alternas= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
