@@ -1,6 +1,5 @@
 // JavaScript Document
 
-
 $(document).ready(function(e) {
 	var abecedario=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     var encontradas = 0;
@@ -94,7 +93,7 @@ alert ("alterna: " + alterna);
  else
   {
 	 $datos =  "clave=" + $id_palabra;
-	 $url = "cbtis16dam.byethost5.com";
+	 $url = "cbtis16dam.netau.net";
   }
 // verificar si default o alterna
 $.ajax({
