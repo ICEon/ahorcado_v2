@@ -100,7 +100,7 @@ alert ("alterna: " + alterna);
 $.ajax({
 	
 	type: "POST",
-	url: "http://"+$url+"/palabras/buscar_palabra.php",
+	url: "http://cbtis16dam.netau.net/palabras/buscar_palabra.php",
 	data: "clave=" + $id_palabra,
     error : function (e){ 
 	alert ("no se recibe respuesta del servidor " + e);
