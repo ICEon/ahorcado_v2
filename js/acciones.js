@@ -95,14 +95,15 @@ alert ("alterna: " + alterna);
 	 $datos =  "clave=" + $id_palabra;
 	 $url = "cbtis16dam.netau.net";
   }
+  
 // verificar si default o alterna
 $.ajax({
 	
 	type: "POST",
 	url: "http://"+$url+"/palabras/buscar_palabra.php",
 	data: "clave=" + $id_palabra,
-    error : function (){ 
-	alert ("no se recibe respuesta del servidor");
+    error : function (e){ 
+	alert ("no se recibe respuesta del servidor " + e);
 	}, 
     success: function (msj) 
 	{
@@ -317,7 +318,7 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 	$('#btn_comenzar').on('tap',function(){
 		$('#encontradas').text('0');		
 		nueva_palabra_bd(Math.floor((Math.random() * 89) + 1));
-		$('#btn_comenzar').css('visibility', 'hidden');
+	//	$('#btn_comenzar').css('visibility', 'hidden');
 		
 	});
 	
