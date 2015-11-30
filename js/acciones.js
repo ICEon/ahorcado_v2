@@ -424,9 +424,10 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
   
 
 
-
+   
 
     $('#conexion').change( function (){
+		alert ("dentro");
 		alert ("conexion: " + $(this).val());
 //	 alert (this.value);
 		 	db.transaction(function(tx) {
