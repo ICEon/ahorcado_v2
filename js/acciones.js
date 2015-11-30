@@ -426,11 +426,8 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
 
    $("#conexion").on("change", function(event, ui) {
-
 //	 alert (this.value);
-						 	db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [this.value], function(tx, res) { 
-			  alert ($(this).val());
+
 			  if ($(this).val() == 0)
 		        {
 			
@@ -450,6 +447,11 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 			   $('.alterna').prop('readonly', false);
 			  alert ("Se utilizara la conexion alterna");
 		   }
+
+
+              db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [alterna], function(tx, res) { 
+			  alert ($(this).val());
 
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
