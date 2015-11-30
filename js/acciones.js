@@ -43,8 +43,10 @@ function conectar_base()
 	 $("#btn_vibrar").addClass('ui-icon-power');
     }
    
+   alert ("config bd " + res.rows.item(0).alterna);
    if (res.rows.item(0).alterna == 1)
     {
+		
 	                $('#txturl').val(res.rows.item(0).url);
 					alterna = 1;
 		 $("#conexion")
@@ -427,16 +429,10 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
 //	 alert (this.value);
 						 	db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [$(this).val()], function(tx, res) {
-
-			    }, function(e) {
-            alert ("ERROR: " + e.message);			  
-			  }); 	   
-             });
-
-
-		 if ($(this).val() == 0)
-		  {
+              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [$(this).val()], function(tx, res) { 
+			  alert ($(this).val());
+			  if ($(this).val() == 0)
+		        {
 			
 			alterna = 1;
 			$('.alterna').prop('readonly', true);
@@ -447,13 +443,28 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 		   {
 				alterna = 0;
 			     db.transaction(function(tx) {
-                  tx.executeSql("select * from configuracion", [], function(tx, res) {                    
-                    $('#txturl').val(res.rows.item(0).url);
+                  tx1.executeSql("select * from configuracion", [], function(tx1, res1) {
+                    $('#txturl').val(res1.rows.item(0).url);
                     });
 				 });
 			   $('.alterna').prop('readonly', false);
 			  alert ("Se utilizara la conexion alterna");
 		   }
+
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
+
+
+			     db.transaction(function(tx) {
+                  tx.executeSql("select alterna from configuracion", [], function(tx, res) {
+                    alert ("altrena despues de switch: " + res.rows.item(0).alterna);
+                    });
+				 });
+
+
+
 
 		});
 		
