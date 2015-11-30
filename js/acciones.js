@@ -428,8 +428,35 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 	   
 
 
-   $("#conexion").bind("change", function(event, ui) {
+   $("#conexion").on("change", function(event, ui) {
 		alert ("dentro");
+				alert ("conexion: " + $(this).val());
+						 	db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [this.value], function(tx, res) {
+				  alert ('Se utilizara la configuracion de conexion alterna');
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             });
+
+		alert ("conexion: " + $(this).val());
+		 if (this.value == 0)
+		  {			
+			alterna = 1;
+			$('.alterna').prop('readonly', true);
+			$('.alterna').val('');			
+		  }
+		  else
+		   {
+				alterna = 0;
+			     db.transaction(function(tx) {
+                  tx.executeSql("select * from configuracion", [], function(tx, res) {                    
+                    $('#txturl').val(res.rows.item(0).url);
+                    });
+				 });
+			   $('.alterna').prop('readonly', false);
+		   }
+
 		});
 		
 }); //deviceready		
