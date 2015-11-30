@@ -450,7 +450,7 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
 
               db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [false], function(tx, res) { 
+              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [alterna], function(tx, res) { 
 			  alert ($(this).val());
 
 			    }, function(e) {
