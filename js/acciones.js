@@ -46,11 +46,7 @@ function conectar_base()
    if (res.rows.item(0).alterna == 1)
     {
 	                $('#txturl').val(res.rows.item(0).url);
-					$('#txthost').val(res.rows.item(0).host);
-					$('#txtbase').val(res.rows.item(0).base);
-					$('#txtusuraio').val(res.rows.item(0).usuario);
-					$('#txtpassword').val(res.rows.item(0).password);
-					alterna = 0;
+					alterna = 1;
 		 $("#conexion")
              .val('1')
             .flipswitch('refresh');
@@ -58,7 +54,7 @@ function conectar_base()
 	}
 	else
 	 {
-		 					alterna = 1;
+		 					alterna = 0;
 		 			$('.alterna').prop('readonly', true);
 	 }
    });   
