@@ -87,15 +87,15 @@ alert ("alterna: " + alterna);
 
 	if (alterna == 1)
  {
-	$datos = "alternas= 1, clave=" + $id_palabra + ", host=" + $('#txthost').val() + ", base="+$('#txtbase').val() + ", usuario=" + $('#txtusuraio').val() + ", password=" + $('#txtpassword').val();
 	$url =  $('#txturl').val();
  }
  else
   {
-	 $datos =  "clave=" + $id_palabra;
+
 	 $url = "cbtis16dam.netau.net";
   }
-  
+
+	 $datos =  "clave=" + $id_palabra;  
 // verificar si default o alterna
 $.ajax({
 	
@@ -426,33 +426,30 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
 
 
-    $('#conexion').on("change", function(e){
+    $('#conexion').change( function (){
 		alert ("conexion: " + $(this).val());
 //	 alert (this.value);
 		 	db.transaction(function(tx) {
               tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [this.value], function(tx, res) {
-				  alert ('Se actualizaron los datos de conexion');
+				  alert ('Se utilizara la configuracion de conexion alterna');
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
 			  }); 	   
              });
 
+		alert ("conexion: " + $(this).val());
 		 if (this.value == 0)
 		  {			
-		  					alterna = 1;
+			alterna = 1;
 			$('.alterna').prop('readonly', true);
 			$('.alterna').val('');			
 		  }
 		  else
 		   {
-			   					alterna = 0;
+				alterna = 0;
 			     db.transaction(function(tx) {
                   tx.executeSql("select * from configuracion", [], function(tx, res) {                    
                     $('#txturl').val(res.rows.item(0).url);
-					$('#txthost').val(res.rows.item(0).host);
-					$('#txtbase').val(res.rows.item(0).base);
-					$('#txtusuraio').val(res.rows.item(0).usuario);
-					$('#txtpassword').val(res.rows.item(0).password);
                     });
 				 });
 			   $('.alterna').prop('readonly', false);
