@@ -51,10 +51,9 @@ function conectar_base()
 					$('#txtusuraio').val(res.rows.item(0).usuario);
 					$('#txtpassword').val(res.rows.item(0).password);
 					alterna = 0;
-		/* $("#conexion")
-            .off("change")
-            .val('1')
-            .flipswitch('refresh');*/
+		 $("#conexion")
+             .val('1')
+            .flipswitch('refresh');
 					 			$('.alterna').prop('readonly', false);
 	}
 	else
@@ -430,7 +429,7 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 
    $("#conexion").on("change", function(event, ui) {
 
-	 alert (this.value);
+//	 alert (this.value);
 						 	db.transaction(function(tx) {
               tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [$(this).val()], function(tx, res) {
 
@@ -440,11 +439,13 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
              });
 
 
-		 if (this.value == 0)
+		 if ($(this).val() == 0)
 		  {
+			
 			alterna = 1;
 			$('.alterna').prop('readonly', true);
-			$('.alterna').val('');			
+			$('.alterna').val('');
+			alert ("Se utilizara la conexion por default");
 		  }
 		  else
 		   {
@@ -455,9 +456,29 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
                     });
 				 });
 			   $('.alterna').prop('readonly', false);
+			  alert ("Se utilizara la conexion alterna");
 		   }
 
 		});
+		
+	$('#actualizar').on('tap', function (){
+		if($('#txturl').val() != '')
+		 {
+   	 	     db.transaction(function(tx) {
+              tx.executeSql("UPDATE configuracion SET url = (?) WHERE id = 1", [$('#txturl').val()], function(tx, res) {
+				  alert ('url actualizada y guardada con exito');
+
+			    }, function(e) {
+            alert ("ERROR: " + e.message);			  
+			  }); 	   
+             }); 
+		 }
+		 else
+		  {
+			alert ('Tienes que escribir la url de la conexion alterna');  
+		  }
+      		
+	});
 		
 }); //deviceready		
 		});//ready
