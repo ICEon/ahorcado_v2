@@ -449,9 +449,9 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 		   }
 
 
-              db.transaction(function(tx) {
-              tx.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [alterna], function(tx, res) { 
-			  alert ($(this).val());
+              db.transaction(function(txr) {
+              txr.executeSql("UPDATE configuracion SET alterna = (?) WHERE id = 1", [2], function(txr, resr) { 
+			  alert ("dentro de la fucnion " + $(this).val());
 
 			    }, function(e) {
             alert ("ERROR: " + e.message);			  
