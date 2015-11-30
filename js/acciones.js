@@ -80,7 +80,7 @@ function conectar_base()
 	  $('#palabra').removeClass("error");
       $("#palabra").removeClass('acierto');
 
-alert ("alterna: " + alterna);
+alert ("alterna al inicio: " + alterna);
 
 	if (alterna == 1)
  {
@@ -97,7 +97,7 @@ alert ("alterna: " + alterna);
 $.ajax({
 	
 	type: "POST",
-	url: "http://cbtis16dam.netau.net/palabras/buscar_palabra.php",
+	url: "http://"+ $url + "/palabras/buscar_palabra.php",
 	data: "clave=" + $id_palabra,
     error : function (e){ 
 	alert ("no se recibe respuesta del servidor " + e);
@@ -442,7 +442,7 @@ audio.preloadFX('acierto', 'recursos/sonidos/acierto.mp3', function(msg){}, func
 		  else
 		   {
 				alterna = 0;
-			     db.transaction(function(tx) {
+			     db.transaction(function(tx1) {
                   tx1.executeSql("select * from configuracion", [], function(tx1, res1) {
                     $('#txturl').val(res1.rows.item(0).url);
                     });
